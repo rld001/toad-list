@@ -1,4 +1,6 @@
+import MainController from './Components/Main/MainController';
 
+import './assets/css/style.css';
 
 export default class App {
         constructor() {
@@ -10,6 +12,7 @@ export default class App {
         }
         
         run() {
-            console.log(this._appName + ' running');
+            const main = new MainController();
+            main.renderView();
         }
 }

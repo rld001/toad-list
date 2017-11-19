@@ -18,6 +18,16 @@ module.exports = {
                 test: /\.jsx?/,
                 include: APP_DIR,
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.tsx?/,
+                include: APP_DIR,
+                loader: 'babel-loader'
+            },
+            {
+                test: /\.css$/,
+                include: APP_DIR,
+                loader: 'style-loader!css-loader'
             }
         ]
     }
