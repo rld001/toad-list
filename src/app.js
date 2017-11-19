@@ -13,6 +13,6 @@ export default class App {
         
         run() {
             const main = new MainController();
-            main.renderView();
+            main.init();
         }
 }

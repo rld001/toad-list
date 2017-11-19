@@ -6,9 +6,17 @@ export default class MainView extends React.Component {
     }
 
     render() {
+        const todos = this.props.todos;
         return (
             <div id="main-view">
-                <button>ok</button>
+                {todos.map(todo => {
+                    return (
+                        <div>
+                            <p>{todo.title}</p>
+                            <p>{todo.description}</p>
+                        </div>
+                    );
+                })}
             </div>
         );
     }
