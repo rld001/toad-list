@@ -1,14 +1,21 @@
 import DataService from '../../Services/DataService';
 
 export default class MainModel {
-    constructor() {
-        this.init();
-    }
     
-    async populateModel() {
+    async populate() {
         const todos = await DataService.getAllTodos();
         this.options = {
             todos: todos
         }
+    }
+
+    async addTodo(todo) {
+        await DataService.addTodoItem(todo);
+        await this.populate();
+    }
+
+    async deleteTodo(id) {
+        await DataService.deleteTodoItem(id);
+        await this.populate();
     }
 }

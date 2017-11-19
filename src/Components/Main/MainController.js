@@ -5,20 +5,33 @@ import MainModel from './MainModel';
 import MainView from './MainView.jsx';
 import './assets/Main.css';
 
-export default class MainController extends MainModel {
+export default class MainController {
     constructor() {
-        super();
+        this._model = new MainModel();
     }
 
-    init() {
-        this.populateModel().then(() => {
-            this.renderView();
-        });
+    async init() {
+        await this._model.populate();
+        this.renderView();
+    }
+
+    async deleteTodo(id) {
+        await this._model.deleteTodo(id);
+        this.renderView();
+    }
+
+    async addTodo(todo) {
+        await this._model.addTodo(todo);
+        this.renderView();
     }
 
     renderView() {
         const props = {
-            todos: this.options.todos
+            todos: this._model.options.todos,
+            actions: {
+                deleteTodo: (id) => this.deleteTodo(id),
+                addTodo: (todo) => this.addTodo(todo)
+            }
         };
 
         ReactDOM.render(<MainView {...props}/>, document.getElementById('root'));
