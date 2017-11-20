@@ -26,6 +26,8 @@ export default class MainView extends React.Component {
                 };
                 this.props.actions.addTodo(item);
             }
+        } else if (response === 'cancel') {
+            this.setState({newItem: {title: '', description: ''}});
         }
         this.setState({ modalOpen: !this.state.modalOpen });
     }
