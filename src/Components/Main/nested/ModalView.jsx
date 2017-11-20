@@ -1,4 +1,5 @@
 import React from 'react';
+import './Modal.css';
 
 export default class ModalView extends React.Component {
     constructor() {
@@ -7,30 +8,11 @@ export default class ModalView extends React.Component {
     }
 
     render() {
-        const backdropStyle = {
-            position: 'fixed',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            backgroundColor: 'rgba(0,0,0,0.3)',
-            padding: 50
-        };
-
-        const modalStyle = {
-            backgroundColor: '#fff',
-            borderRadious: 5,
-            maxWidth: 500,
-            minHeight: 300,
-            margin: '0 auto',
-            padding: 30
-        };
-
         const { closeBtnText, submitBtn, submitBtnText } = this.props;
 
         return (
-            <div className="backdrop" style={backdropStyle}>
-                <div className="modal" style={modalStyle}>
+            <div className="backdrop">
+                <div className="modal">
                     {this.props.children}
 
                     <div className="footer">
