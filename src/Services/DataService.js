@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const url = 'http://localhost:5050/';
 
+// TODO: Error Handling
 export default class DataService {
 
     static async getAllTodos() {
@@ -28,17 +29,21 @@ export default class DataService {
         }
     }
 
-    // static updateTodoItem(item) {
-    //     return axios.put(
-    //         url + 'api/Todo/' + item.id, 
-    //         {
-    //             id: item.id,
-    //             title: item.title,
-    //             description: item.description,
-    //             createdDate: item.createdDate
-    //         }
-    //     );
-    // }
+    static async  updateTodoItem(item) {
+        try {
+            const response = await axios.put(
+                url + 'api/Todo/' + item.id, 
+                {
+                    id: item.id,
+                    title: item.title,
+                    description: item.description,
+                    createdDate: item.createdDate
+                }
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     static async deleteTodoItem(itemId) {
         try {

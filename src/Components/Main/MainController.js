@@ -25,12 +25,18 @@ export default class MainController {
         this.renderView();
     }
 
+    async updateTodo(todo) {
+        await this._model.updateTodo(todo);
+        this.renderView();
+    }
+
     renderView() {
         const props = {
             todos: this._model.options.todos,
             actions: {
                 deleteTodo: (id) => this.deleteTodo(id),
-                addTodo: (todo) => this.addTodo(todo)
+                addTodo: (todo) => this.addTodo(todo),
+                updateTodo: (todo) => this.updateTodo(todo)
             }
         };
 

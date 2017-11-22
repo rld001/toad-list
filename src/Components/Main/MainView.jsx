@@ -8,32 +8,51 @@ export default class MainView extends React.Component {
 
         this.state = { 
             modalOpen: false, 
-            newItem: {title: '', description: ''}
+            isEditing: false,
+            newItem: { id: null, title: '', description: '', createdDate: null }
         };
     }
 
-    editTodo(todo) {
-        console.log('Edit todo: ', todo);
-    }
+    
 
-    toggleAddItemModal (response) {
-        if(response === 'submit') {
-            if(this.validateNewItem()) {
-                const item = { 
-                    title: this.state.newItem.title, 
-                    description: this.state.newItem.description, 
-                    createdDate: new Date()
-                };
-                this.props.actions.addTodo(item);
-            }
-        } else if (response === 'cancel') {
-            this.setState({newItem: {title: '', description: ''}});
+    toggleItemModal (request) {
+        if(!request) {
+            this.setState({ modalOpen: !this.state.modalOpen, isEditing: false });
         }
-        this.setState({ modalOpen: !this.state.modalOpen });
+
+        if (request === 'cancel') {
+            return this.setState({
+                newItem: { id: null, title: '', description: '', createdDate: null },
+                isEditing: false,
+                modalOpen: false
+            });
+        }
+
+        if(!this.validateNewItem) {
+            // TODO: show problems with validation here in UI
+            return;
+        }
+
+        if (request === 'submit-add') {
+            this.props.actions.addTodo({ 
+                title: this.state.newItem.title, 
+                description: this.state.newItem.description, 
+                createdDate: new Date()
+            });
+        } else if (request === 'submit-edit') {
+            this.props.actions.updateTodo({
+                id: this.state.newItem.id,
+                title: this.state.newItem.title,
+                description: this.state.newItem.description,
+                createdDate: this.state.newItem.createdDate
+            })
+        }
+        this.setState({ modalOpen: !this.state.modalOpen, isEditing: false });
     }
 
     validateNewItem() {
         const newItem = this.state.newItem;
+        // TODO: validate
         return true;
     }
 
@@ -45,12 +64,50 @@ export default class MainView extends React.Component {
         });
     }
 
+    editTodoModal(todo) {
+        this.setState({ 
+            newItem: { id: todo.id, title: todo.title, description: todo.description, createdDate: todo.createdDate },
+            isEditing: true,
+            modalOpen: true
+        });
+    }
+
+    openItemModal() {
+        this.setState({ modalOpen: true });
+    }
+
+    closeItemModal() {
+        this.setState({
+            modalOpen: false, 
+            isEditing: false, 
+            newItem: { id: null, title: '', description: '', createdDate: null },
+        });
+    }
+
+    submitItemModal(submissionType) {
+        if(!this.validateNewItem) {
+            // TODO: show problems with validation here in UI
+            return;
+        }
+
+        if (submissionType === 'submit-add') {
+            this.props.actions.addTodo({ 
+                title: this.state.newItem.title, 
+                description: this.state.newItem.description, 
+                createdDate: new Date()
+            });
+        } else if (submissionType === 'submit-edit') {
+            this.props.actions.updateTodo(this.state.newItem);
+        }
+        this.closeItemModal();
+    }
+
     render() {
         const todos = this.props.todos;
         return (
             <div id="main-view">
                 <div className="toolbar">
-                    <button onClick={() => this.toggleAddItemModal('open')}>Add Item</button>
+                    <button onClick={() => this.openItemModal()}>Add Item</button>
                 </div>
                 <div className="todo-container">
                     {todos.map(todo => {
@@ -58,7 +115,7 @@ export default class MainView extends React.Component {
                             <div className="todo-item" key={todo.id}>
                                 <p>{todo.title}</p>
                                 <p>{todo.description}</p>
-                                <button onClick={() => this.editTodo(todo)}>Edit</button>
+                                <button onClick={() => this.editTodoModal(todo)}>Edit</button>
                                 <button onClick={() => this.props.actions.deleteTodo(todo.id)}>Delete</button>
                             </div>
                         );
@@ -66,9 +123,9 @@ export default class MainView extends React.Component {
                 </div>
                 {this.state.modalOpen && (
                     <ModalView 
-                        onClose={() => this.toggleAddItemModal('cancel')}
+                        onClose={() => this.closeItemModal()}
                         closeBtnText="Cancel"
-                        onSubmit={() => this.toggleAddItemModal('submit')}
+                        onSubmit={() => this.submitItemModal(this.state.isEditing ? 'submit-edit' : 'submit-add')}
                         submitBtn={true}
                         submitBtnText="Save Item"
                     >

@@ -18,4 +18,9 @@ export default class MainModel {
         await DataService.deleteTodoItem(id);
         await this.populate();
     }
+
+    async updateTodo(todo) {
+        await DataService.updateTodoItem(todo);
+        await this.populate();
+    }
 }
