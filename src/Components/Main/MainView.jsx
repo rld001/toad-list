@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ValidationHelper from '../../Helpers/ValidationHelper';
 import ModalView from './nested/ModalView.jsx';
 
 export default class MainView extends React.Component {
@@ -13,55 +13,17 @@ export default class MainView extends React.Component {
         };
     }
 
-    
-
-    toggleItemModal (request) {
-        if(!request) {
-            this.setState({ modalOpen: !this.state.modalOpen, isEditing: false });
-        }
-
-        if (request === 'cancel') {
-            return this.setState({
-                newItem: { id: null, title: '', description: '', createdDate: null },
-                isEditing: false,
-                modalOpen: false
-            });
-        }
-
-        if(!this.validateNewItem) {
-            // TODO: show problems with validation here in UI
-            return;
-        }
-
-        if (request === 'submit-add') {
-            this.props.actions.addTodo({ 
-                title: this.state.newItem.title, 
-                description: this.state.newItem.description, 
-                createdDate: new Date()
-            });
-        } else if (request === 'submit-edit') {
-            this.props.actions.updateTodo({
-                id: this.state.newItem.id,
-                title: this.state.newItem.title,
-                description: this.state.newItem.description,
-                createdDate: this.state.newItem.createdDate
-            })
-        }
-        this.setState({ modalOpen: !this.state.modalOpen, isEditing: false });
-    }
-
-    validateNewItem() {
-        const newItem = this.state.newItem;
-        // TODO: validate
-        return true;
-    }
-
     handleChangeInput(e, key) {
         let newItem = this.state.newItem;
         newItem[key] = e.target.value;
         this.setState({
             newItem: newItem
         });
+    }
+
+    validateNewItem() {
+        const item = this.state.newItem;
+        return ValidationHelper.validateTodoItem(item);
     }
 
     editTodoModal(todo) {
@@ -85,8 +47,8 @@ export default class MainView extends React.Component {
     }
 
     submitItemModal(submissionType) {
-        if(!this.validateNewItem) {
-            // TODO: show problems with validation here in UI
+        if(!this.validateNewItem()) {
+            alert('Invalid Item');
             return;
         }
 
