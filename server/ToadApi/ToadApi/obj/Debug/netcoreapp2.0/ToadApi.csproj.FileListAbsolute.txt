@@ -1,0 +1,10 @@
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\obj\Debug\netcoreapp2.0\ToadApi.csproj.CoreCompileInputs.cache
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\obj\Debug\netcoreapp2.0\ToadApi.AssemblyInfoInputs.cache
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\obj\Debug\netcoreapp2.0\ToadApi.AssemblyInfo.cs
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\bin\Debug\netcoreapp2.0\ToadApi.deps.json
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\bin\Debug\netcoreapp2.0\ToadApi.runtimeconfig.json
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\bin\Debug\netcoreapp2.0\ToadApi.runtimeconfig.dev.json
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\bin\Debug\netcoreapp2.0\ToadApi.dll
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\bin\Debug\netcoreapp2.0\ToadApi.pdb
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\obj\Debug\netcoreapp2.0\ToadApi.dll
+C:\Users\Robin Denton\projects\toad-list\server\ToadApi\ToadApi\obj\Debug\netcoreapp2.0\ToadApi.pdb

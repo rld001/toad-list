@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+#root {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightskyblue;    
+}
+
+button {
+    background-color: #f48c42;
+    border: 1px solid;
+    display: block;
+    padding: 2px;
+}
