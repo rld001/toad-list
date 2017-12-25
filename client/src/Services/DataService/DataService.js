@@ -1,38 +1,39 @@
 import axios from 'axios';
+import config from './DataService.config';
 
-const url = 'http://localhost:5050/';
-
-// TODO: Error Handling
 export default class DataService {
+    constructor() {
+        this.config = config;
+    }
 
-    static async getAllTodos() {
+    async getAllTodos() {
         try {
             const response = await axios({
                 method: 'get',
-                url: url + 'api/Todo'
+                url: this.config.baseUrl + 'api/Todo'
             });
             return response.data;
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
-    static async addTodoItem(item) {
+    async addTodoItem(item) {
         try {
-            const response = await axios.post(url + 'api/Todo', {
+            const response = await axios.post(this.config.baseUrl + 'api/Todo', {
                 title: item.title,
                 description: item.description,
                 createdDate: item.createdDate
             });
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
-    static async  updateTodoItem(item) {
+    async updateTodoItem(item) {
         try {
             const response = await axios.put(
-                url + 'api/Todo/' + item.id, 
+                this.config.baseUrl + 'api/Todo/' + item.id, 
                 {
                     id: item.id,
                     title: item.title,
@@ -41,16 +42,16 @@ export default class DataService {
                 }
             );
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
-    static async deleteTodoItem(itemId) {
+    async deleteTodoItem(itemId) {
         try {
-            const response = await axios.delete(url + 'api/Todo/' + itemId);
+            const response = await axios.delete(this.config.baseUrl + 'api/Todo/' + itemId);
             return response;
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
         
     }
