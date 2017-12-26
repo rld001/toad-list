@@ -10,6 +10,7 @@ export default class HomeLayout {
     }
 
     async init() {
+        //this.ctx.set('modalCloseCallback', null);
         await this.populateModel();
     }
 

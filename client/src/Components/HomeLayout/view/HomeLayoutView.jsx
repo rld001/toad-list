@@ -16,18 +16,23 @@ export default class HomeLayoutView extends React.Component {
 
     render() {
         return (
-            <div>
-                { this.props.model.options.todos.map(todo => {
-                    return (
-                        <div key={todo.id}>
-                            <h1>{todo.title}</h1>
-                            <h2>{todo.description}</h2>
-                            <button onClick={() => this.editTodo(todo)}>Edit</button>
-                            <button onClick={() => this.deleteTodo(todo)}>Delete</button>
-                        </div>
-                    );
-                })
-                }
+            <div id="main-view">
+                <div className="toolbar">
+                    <button>Add Item</button>
+                </div>
+                <div className="todo-container">
+                    { this.props.model.options.todos.map(todo => {
+                        return (
+                            <div key={todo.id}>
+                                <h1>{todo.title}</h1>
+                                <h2>{todo.description}</h2>
+                                <button onClick={() => this.editTodo(todo)}>Edit</button>
+                                <button onClick={() => this.deleteTodo(todo)}>Delete</button>
+                            </div>
+                        );
+                    })
+                    }
+                </div>
             </div>
         )
     }

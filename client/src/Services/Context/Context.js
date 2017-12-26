@@ -21,6 +21,5 @@ class Context {
 }
 
 const instance = new Context();
-//Object.freeze(instance);
 
 export default instance;

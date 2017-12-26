@@ -1,19 +1,15 @@
 import HomeLayoutController from '../../Components/HomeLayout/HomeLayout.controller';
-import AboutLayoutController from '../../Components/AboutLayout/AboutLayout.controller';
+import ModalLayoutController from '../../Components/ModalLayout/ModalLayout.controller';
 
 export default {
     layouts: {
         home: {
             controller: HomeLayoutController,
-            transitions: {
-                about: 'about'
-            }
+            transitions: {}
         },
-        about: {
-            controller: AboutLayoutController,
-            transitions: {
-                home: 'home'
-            }
+        modal: {
+            controller : ModalLayoutController,
+            transitions: {}
         }
     }
 }

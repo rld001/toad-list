@@ -1,8 +1,9 @@
 import Context from '../../Services/Context/Context';
 
-export default class AboutLayout {
+export default class ModalLayout {
     constructor() {
         this.ctx = Context;
+
     }
 
     async init() {
@@ -14,7 +15,7 @@ export default class AboutLayout {
     }
 
     async update() {
-        await this.populateModel();
+        return await this.populateModel();
     }
 
     async resolveState() {
